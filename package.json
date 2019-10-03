@@ -1,0 +1,19 @@
+{
+  "name": "roobot",
+  "version": "1.0.0",
+  "private": true,
+  "author": "Patrick Connolly <patrick.c.connolly@gmail.com>",
+  "description": "A friendly helper robot that lives in Hypha's chat rooms",
+  "dependencies": {
+    "hubot": "^3.3.2",
+    "hubot-diagnostics": "^1.0.0",
+    "hubot-help": "^1.0.1",
+    "hubot-heroku-keepalive": "^1.0.3",
+    "hubot-matrix-enhanced": "^1.0.10",
+    "hubot-redis-brain": "^1.0.0",
+    "hubot-rules": "^1.0.0"
+  },
+  "engines": {
+    "node": "> 4.0.0"
+  }
+}
