@@ -1,1 +1,1 @@
-web: bin/hubot --adapter matrix-enhanced $PORT
+web: bin/hubot --adapter matrix $PORT
