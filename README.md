@@ -22,6 +22,9 @@ roboot: Great! Archiving in progress!
 roobot: Awaiting public review at https://github.com/patcon/archive-demo/pull/1
 ```
 
+**Notice:** For here on, these features of the `archive` command are
+_not yet implemented_.
+
 It can even be used to archiving private meetings, with `private:
 true` in the YAML front-matter.
 
