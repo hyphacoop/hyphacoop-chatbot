@@ -8,7 +8,7 @@
     "hubot": "^2.18.0",
     "hubot-help": "^0.1.3",
     "hubot-heroku-keepalive": "^1.0.3",
-    "hubot-matrix-enhanced": "^1.0.10",
+    "hubot-matrix": "davidar/hubot-matrix",
     "hubot-redis-brain": "^1.0.0",
     "node-html-parser": "^1.1.16",
     "octonode": "^0.9.5"

@@ -122,7 +122,7 @@ bcrypt-pbkdf@^1.0.0:
   dependencies:
     tweetnacl "^0.14.3"
 
-bluebird@^3.5.0, bluebird@^3.5.5:
+bluebird@^3.5.0:
   version "3.7.0"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.7.0.tgz#56a6a886e03f6ae577cffedeb524f8f2450293cf"
   integrity sha512-aBQ1FxIa7kSWCcmKHlcHFlT2jt6J/l4FzC7KcPELkOJOsPOb/bccdhmIrKDfXhwFrmc7vDoDrrepFvGqjyXGJg==
@@ -221,13 +221,6 @@ compression@~1.5.2:
     debug "~2.2.0"
     on-headers "~1.0.0"
     vary "~1.0.1"
-
-config@*:
-  version "3.2.3"
-  resolved "https://registry.yarnpkg.com/config/-/config-3.2.3.tgz#147a30f9eb235ecc46516f767e211335dbcbf3cc"
-  integrity sha512-pditxQzO+SkKX/2gs99YnUGEjmBVkTj2o/hGOgC0oYEU7QgLnVVDYmcSL6HiGels/8QtFJpFzi5iKYv4D0dalg==
-  dependencies:
-    json5 "^1.0.1"
 
 connect-multiparty@^1.2.5:
   version "1.2.5"
@@ -615,13 +608,10 @@ hubot-heroku-keepalive@^1.0.3:
   resolved "https://registry.yarnpkg.com/hubot-heroku-keepalive/-/hubot-heroku-keepalive-1.0.3.tgz#2950e28095ee4a6ace2b76f90e2a91ba91e6813c"
   integrity sha1-KVDigJXuSmrOK3b5DiqRupHmgTw=
 
-hubot-matrix-enhanced@^1.0.10:
-  version "1.0.10"
-  resolved "https://registry.yarnpkg.com/hubot-matrix-enhanced/-/hubot-matrix-enhanced-1.0.10.tgz#1a303c9d8dc6067190c84973464de157a85a41b2"
-  integrity sha512-dde7zxfFRiZhUSpqYYRxabmdGHroFB2aQkf1wA6Kw2nCW8YVUli65U42qoyzJ0CLM3iELDtR2nuKknsSh29tAw==
+hubot-matrix@davidar/hubot-matrix:
+  version "1.2.0"
+  resolved "https://codeload.github.com/davidar/hubot-matrix/tar.gz/d10e5a4a316a1c727846ac502767a80231e2d9c1"
   dependencies:
-    bluebird "^3.5.5"
-    config "*"
     image-size "^0.5.1"
     matrix-js-sdk "*"
     node-localstorage "^1.3.0"
@@ -714,13 +704,6 @@ json-stringify-safe@~5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/json-stringify-safe/-/json-stringify-safe-5.0.1.tgz#1296a2d58fd45f19a0f6ce01d65701e2c735b6eb"
   integrity sha1-Epai1Y/UXxmg9s4B1lcB4sc1tus=
-
-json5@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/json5/-/json5-1.0.1.tgz#779fb0018604fa854eacbf6252180d83543e3dbe"
-  integrity sha512-aKS4WQjPenRxiQsC93MNfjx+nbF4PAdYzmd/1JIj8HYzqfbu86beTuNgXDzPknWk0n0uARlyewZo4s++ES36Ow==
-  dependencies:
-    minimist "^1.2.0"
 
 jsprim@^1.2.2:
   version "1.4.1"
@@ -821,11 +804,6 @@ minimist@0.0.8:
   version "0.0.8"
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-0.0.8.tgz#857fcabfc3397d2625b8228262e86aa7a011b05d"
   integrity sha1-hX/Kv8M5fSYluCKCYuhqp6ARsF0=
-
-minimist@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.0.tgz#a35008b20f41383eec1fb914f4cd5df79a264284"
-  integrity sha1-o1AIsg9BOD7sH7kU9M1d95omQoQ=
 
 mkdirp@0.5.1:
   version "0.5.1"
