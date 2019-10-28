@@ -100,7 +100,7 @@ module.exports = (robot) ->
                           robot.logger.error "Encountered an error creating file :( #{err}"
                           return
 
-                        msg.send "Yay! Created pull request:\n#{payload.html_url}"
+                        msg.send "Yay! Archiving in progress!\nWaiting for public review at #{payload.html_url}"
 
 getMarkdownUrl = (html_url) ->
   url = ''

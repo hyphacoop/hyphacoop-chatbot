@@ -18,8 +18,8 @@ This command is used for archiving HackMD documentings in GitHub repos.
 ```
 henry: hey all, how do we archive our public meetings now?
 maria: @roobot archive https://hackmd.io/ERa1OsfKRranY-2sM1BcNQ
-roboot: Great! Archiving in progress!
-roobot: Awaiting public review at https://github.com/patcon/archive-demo/pull/1
+roboot: Yay! Archiving in progress!
+        Waiting for public review at https://github.com/hyphacoop/organizing/pull/123
 ```
 
 **Notice:** For here on, these features of the `archive` command are
