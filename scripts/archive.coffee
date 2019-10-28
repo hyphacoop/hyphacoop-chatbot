@@ -79,7 +79,7 @@ module.exports = (robot) ->
                   ghrepo.createReference pr_branch, head_commit, (err, payload, header) ->
                     if err
                       robot.logger.error "Encountered an error creating reference :( #{err}"
-                      msg.send "Seems there's already a branch created for these notes."
+                      msg.send "Seems there's already a branch created for these notes.\nSee: https://github.com/#{config.archive_repo}/pull/"
                       return
 
                     ghrepo.createContents filename, "Created #{filename}", mkdn_content, pr_branch, (err, payload, header) ->
