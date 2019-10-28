@@ -103,11 +103,9 @@ module.exports = (robot) ->
                         msg.send "Yay! Archiving in progress!\nWaiting for public review at #{payload.html_url}"
 
 getMarkdownUrl = (html_url) ->
-  url = ''
-  url_data = Url.parse html_url
-  if url_data.hostname == 'hackmd.io'
-    url = html_url + '/download'
-    return url
+  url = Url.parse html_url
+  if url.hostname == 'hackmd.io'
+    return "#{url.protocol}//#{url.host}#{url.pathname}/download"
 
   return null
 
