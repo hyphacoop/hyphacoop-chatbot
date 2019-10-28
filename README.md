@@ -48,3 +48,11 @@ roboot: Great! Archiving in progress!
 roobot: Awaiting public review at https://github.com/patcon/archive-demo/pull/2
 roobot: Awaiting private review at https://gitlab.com/patcon/archive-demo-private/merge_requests/2
 ```
+
+## Deployment
+
+- We currently run our chatbot on Heroku.
+- New code is auto-deployed from `master` branch via Heroku deployment.
+- We manage uptime of chatbot via `hubot-heroku-keepalive`, which
+  required [some important initial setup
+tasks](https://github.com/hubot-scripts/hubot-heroku-keepalive#waking-hubot-up).
