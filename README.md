@@ -22,7 +22,7 @@ roboot: Yay! Archiving in progress!
         Waiting for public review at https://github.com/hyphacoop/organizing/pull/123
 ```
 
-**Notice:** For here on, these features of the `archive` command are
+**Notice:** The below features of the `archive` command are
 _not yet implemented_.
 
 It can even be used to archiving private meetings, with `private:
