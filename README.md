@@ -49,6 +49,26 @@ roobot: Awaiting public review at https://github.com/patcon/archive-demo/pull/2
 roobot: Awaiting private review at https://gitlab.com/patcon/archive-demo-private/merge_requests/2
 ```
 
+## Local Development
+
+These instructions assume usage of the Heroku CLI.
+
+1. **Configure** your local chatbot.
+  - Create a `.env` file, using `sample.env` as guide. (Using `heroku
+    config` might help to gather settings from hosted app.)
+1. First, experiment with chatbot locally via its **terminal/shell adapter**.
+  - Run `heroku local:run bin/hubot`
+  - Experiment on command-line shell. (Note that this can still call out
+    to production services if those access tokens are configured in `.env`.
+1. Once satisfied, try running app with true **Matrix chat adapter**.
+  - Spin down the live app: `heroku ps:scale web=0`
+  - Run the app locally with Matrix chat adapter: `heroku local`
+  - Experiment in Matrix/Riot chat room. E.g., `#hyphacoop-bot-testing:tomesh.net`
+  - When done, spin up live app again: `heroku ps:scale web=1`
+1. When you are satisfied, create a pull request against `master`
+   branch.
+  - Merging this pull request will deploy the changes live.
+
 ## Deployment
 
 - We currently run our chatbot on Heroku.
