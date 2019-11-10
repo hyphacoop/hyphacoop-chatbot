@@ -110,7 +110,9 @@ getMarkdownUrl = (html_url) ->
   return null
 
 sluggify = (string) ->
-  string = string.replace ':', ''
-  string = string.replace RegExp(' ', 'g'), '-'
+  # Remove all except alphanumeric, spaces, and hyphens.
+  string = string.replace /[^a-z0-9\ \-]/gi, ''
+  # Convert 1+ consecutive spaces to a single hyphen.
+  string = string.replace /[ ]+/g, '-'
   string = string.toLowerCase()
   return string
