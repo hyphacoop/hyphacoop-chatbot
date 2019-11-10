@@ -9,6 +9,7 @@
 #   hubot archive <hackmd url> - Creates a pull request from the notes
 #
 # Dependencies:
+#   front-matter
 #   node-html-parser
 #   octonode
 #
@@ -18,6 +19,7 @@
 # Author:
 #   patcon@github
 
+frontmatter = require 'front-matter'
 github = require 'octonode'
 Url = require 'url'
 HtmlParser = require 'node-html-parser'
@@ -65,6 +67,11 @@ module.exports = (robot) ->
               mkdn_content = body
               # Convert tabs to 4 spaces
               mkdn_content = mkdn_content.replace /\t/g, '    '
+              mkdn_data = frontmatter mkdn_content
+
+              if mkdn_data.attributes.private == true
+                msg.send "Sorry, no can do: document is marked 'private'"
+                return
 
               ghrepo = client.repo config.archive_repo
               ghrepo.info (err, payload, header) ->
