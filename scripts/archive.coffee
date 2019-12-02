@@ -110,6 +110,8 @@ getMarkdownUrl = (html_url) ->
   return null
 
 sluggify = (string) ->
+  # Convert slashes to hyphens to preserve spacing.
+  string = string.replace /\//g, '-'
   # Remove all except alphanumeric, spaces, and hyphens.
   string = string.replace /[^a-z0-9\ \-]/gi, ''
   # Convert 1+ consecutive spaces to a single hyphen.
