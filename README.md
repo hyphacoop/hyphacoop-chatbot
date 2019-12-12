@@ -12,6 +12,7 @@ The following commands can be run in chat via messages that address the
 chatbot.
 
 ### `archive`
+<sup>:gear: Technical documentation: [`/scripts/archive.coffee`](/scripts/archive.coffee#L1)</sup>
 
 This command is used for archiving HackMD documentings in GitHub repos.
 
