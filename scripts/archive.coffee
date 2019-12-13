@@ -26,7 +26,7 @@ config =
   github_token: process.env.HUBOT_GITHUB_ACCESS_TOKEN
   archive_repo: process.env.HUBOT_ARCHIVE_REPO
 
-[config.archive_repo_login, config.archive_repo_name] = config.archive_repo.split '/'
+[config.archive_repo_user, config.archive_repo_name] = config.archive_repo.split '/'
 
 client = github.client(config.github_token)
 
