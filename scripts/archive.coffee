@@ -56,7 +56,7 @@ module.exports = (robot) ->
           pr_body += "[`archive` command of our chatbot](https://github.com/patcon/hyphacoop-chatbot/tree/master/README.md#archive),"
           pr_body += " kicked off by user `#{user}` in `#{room}`."
 
-          rendered_url = "https://#{config.archive_repo_login}.github.io/#{config.archive_repo_name}/#{slug}.html"
+          rendered_url = "https://#{config.archive_repo_user}.github.io/#{config.archive_repo_name}/#{slug}.html"
           pr_body += "\n\nAfter being merged, the rendered document will be accessible here:\n#{rendered_url}"
 
           markdown_url = getMarkdownUrl(html_url)
