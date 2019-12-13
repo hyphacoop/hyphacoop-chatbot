@@ -5,6 +5,7 @@
   "author": "Patrick Connolly <patrick.c.connolly@gmail.com>",
   "description": "A friendly helper robot that lives in Hypha's chat rooms",
   "dependencies": {
+    "front-matter": "^3.0.2",
     "hubot": "^2.18.0",
     "hubot-help": "^0.1.3",
     "hubot-heroku-keepalive": "^1.0.3",

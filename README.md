@@ -22,6 +22,14 @@ roboot: Yay! Archiving in progress!
         Waiting for public review at https://github.com/hyphacoop/organizing/pull/123
 ```
 
+It will be smart about not publicly archiving private meeting notes, when `private: true` is in the YAML front-matter.
+
+```
+henry: what about when we have a private meeting like that last one?
+maria: @roobot archive https://hackmd.io/uogV1UljQT633Vi6FfLK6g
+roboot: Sorry, no can do: document is marked 'private'
+```
+
 **Notice:** The below features of the `archive` command are
 _not yet implemented_.
 
