@@ -16,12 +16,14 @@ describe 'archive', ->
 
     do nock.disableNetConnect
     nock('https://hackmd.io')
+      .persist()
       .get('/xxxxxxxxxxxxxxxxxxxxxx/download')
       .reply 200, '# This is a test'
       .get('/xxxxxxxxxxxxxxxxxxxxxx')
       .reply 200, '<title>This is a test</title>'
 
     nock('https://api.github.com')
+      .persist()
       .get("/repos/#{archive_repo}")
       .reply 200, {default_branch: 'master', owner: {login: 'myorg'}}
       .get("/repos/#{archive_repo}/branches/master")
