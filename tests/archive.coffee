@@ -24,6 +24,26 @@ generate_github_mock = (repo, title_slug) ->
     .post("/repos/#{repo.slug}/pulls")
     .reply 201, {html_url: "https://github.com/#{repo.slug}/pull/123"}
 
+default_pad_data =
+  link: 'https://hackmd.io/xxxxxxxxxxxxxxxxxxxxxx'
+  title: 'This is a test'
+  title_slug: 'this-is-a-test'
+  frontmatter: ''
+
+generate_hackmd_mock = (data) ->
+  content_html = "<title>#{data.title}<title>"
+  content_md = """
+    ---
+    #{data.frontmatter}
+    ---
+    # #{data.title}
+    """
+  nock('https://hackmd.io')
+    .get('/xxxxxxxxxxxxxxxxxxxxxx')
+    .reply 200, content_html
+    .get('/xxxxxxxxxxxxxxxxxxxxxx/download')
+    .reply 200, content_md
+
 process.env.HUBOT_ARCHIVE_REPO = archive_repo.slug
 
 # helper loads a specific script if it's a file
@@ -52,16 +72,9 @@ describe 'archive', ->
   negative_response = "Sorry, no can do: document is marked 'private'"
 
   context 'user archives dynamic hackmd split link', (done) ->
-    title = 'This is a test'
-    link = 'https://hackmd.io/xxxxxxxxxxxxxxxxxxxxxx'
     beforeEach (done) ->
-      nock('https://hackmd.io')
-        .get('/xxxxxxxxxxxxxxxxxxxxxx/download')
-        .reply 200, "# #{title}"
-        .get('/xxxxxxxxxxxxxxxxxxxxxx')
-        .reply 200, "<title>#{title}</title>"
-
-      room.user.say 'alice', "hubot archive #{link}"
+      generate_hackmd_mock(default_pad_data)
+      room.user.say 'alice', "hubot archive #{default_pad_data.link}"
       setTimeout done, 100
 
     it 'should create pull request', ->
@@ -70,63 +83,23 @@ describe 'archive', ->
 
   context 'archiving notes with various titles', (done) ->
     context 'simple title', (done) ->
-      title = 'This is a test'
-      title_slug = 'this-is-a-test'
-      link = 'https://hackmd.io/xxxxxxxxxxxxxxxxxxxxxx'
+
       beforeEach (done) ->
-        nock('https://hackmd.io')
-          .get('/xxxxxxxxxxxxxxxxxxxxxx/download')
-          .reply 200, "# #{title}"
-          .get('/xxxxxxxxxxxxxxxxxxxxxx')
-          .reply 200, "<title>#{title}</title>"
+        generate_hackmd_mock(default_pad_data)
         generate_github_mock(archive_repo, title_slug)
 
-        room.user.say 'alice', "hubot archive #{link}"
+        room.user.say 'alice', "hubot archive #{default_pad_data.link}"
         setTimeout done, 100
 
   context 'archiving private notes', (done) ->
-    before ->
-      nock('https://hackmd.io')
-        .get('/private-true')
-        .reply 200, '<title>This is a test</title>'
-        .get('/private-true/download')
-        .reply 200, """
-          ---
-          private: true
-          ---
-          # This is a test
-          """
-        .get('/private-false')
-        .reply 200, '<title>This is a test</title>'
-        .get('/private-false/download')
-        .reply 200, """
-          ---
-          private: false
-          ---
-          # This is a test
-          """
-        .get('/private-null')
-        .reply 200, '<title>This is a test</title>'
-        .get('/private-null/download')
-        .reply 200, """
-          ---
-          private: null
-          ---
-          # This is a test
-          """
-        .get('/private-missing')
-        .reply 200, '<title>This is a test</title>'
-        .get('/private-missing/download')
-        .reply 200, """
-          ---
-          ---
-          # This is a test
-          """
 
     context 'private flag is set true', (done) ->
-      link = 'https://hackmd.io/private-true'
+      pad_data = Object.assign {}, default_pad_data
+      pad_data.frontmatter = 'private: true'
+
       beforeEach (done) ->
-        room.user.say 'alice', "hubot archive #{link}"
+        generate_hackmd_mock(pad_data)
+        room.user.say 'alice', "hubot archive #{pad_data.link}"
         setTimeout done, 100
 
       it 'should not create pull request', ->
@@ -134,9 +107,12 @@ describe 'archive', ->
         expect(hubot_reply).to.include negative_response
 
     context 'private flag is set false', (done) ->
-      link = 'https://hackmd.io/private-false'
+      pad_data = Object.assign {}, default_pad_data
+      pad_data.frontmatter = 'private: false'
+
       beforeEach (done) ->
-        room.user.say 'alice', "hubot archive #{link}"
+        generate_hackmd_mock(pad_data)
+        room.user.say 'alice', "hubot archive #{pad_data.link}"
         setTimeout done, 100
 
       it 'should create pull request', ->
@@ -144,9 +120,12 @@ describe 'archive', ->
         expect(hubot_reply).to.include affirmative_response
 
     context 'private flag is set null', (done) ->
-      link = 'https://hackmd.io/private-null'
+      pad_data = Object.assign {}, default_pad_data
+      pad_data.frontmatter = 'private: null'
+
       beforeEach (done) ->
-        room.user.say 'alice', "hubot archive #{link}"
+        generate_hackmd_mock(pad_data)
+        room.user.say 'alice', "hubot archive #{pad_data.link}"
         setTimeout done, 100
 
       it 'should create pull request', ->
@@ -154,9 +133,12 @@ describe 'archive', ->
         expect(hubot_reply).to.include affirmative_response
 
     context 'private flag is missing', (done) ->
-      link = 'https://hackmd.io/private-missing'
+      pad_data = Object.assign {}, default_pad_data
+      pad_data.frontmatter = ''
+
       beforeEach (done) ->
-        room.user.say 'alice', "hubot archive #{link}"
+        generate_hackmd_mock(pad_data)
+        room.user.say 'alice', "hubot archive #{pad_data.link}"
         setTimeout done, 100
 
       it 'should create pull request', ->
