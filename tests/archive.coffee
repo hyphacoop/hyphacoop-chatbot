@@ -26,7 +26,7 @@ generate_github_mock = (repo, title_slug) ->
 
 DEFAULT_PAD_DATA =
   link: 'https://hackmd.io/xxxxxxxxxxxxxxxxxxxxxx'
-  title: 'This is a test'
+  title: 'This is a test - HackMD'
   title_slug: 'this-is-a-test'
   frontmatter: ''
 
@@ -54,16 +54,14 @@ describe 'archive', ->
 
   before ->
     do nock.disableNetConnect
-    generate_github_mock(archive_repo, 'this-is-a-test')
-
-  after ->
-    nock.cleanAll()
 
   beforeEach ->
+    generate_github_mock(archive_repo, DEFAULT_PAD_DATA.title_slug)
     room = helper.createRoom(httpd: false)
 
   afterEach ->
     room.destroy()
+    nock.cleanAll()
 
   affirmative_response = """
     Yay! Archiving in progress!
@@ -82,14 +80,72 @@ describe 'archive', ->
       expect(hubot_reply).to.include affirmative_response
 
   context 'archiving notes with various titles', (done) ->
+    beforeEach ->
+      this.pad_data = Object.assign {}, DEFAULT_PAD_DATA
+
     context 'simple title', (done) ->
 
       beforeEach (done) ->
-        generate_hackmd_mock(DEFAULT_PAD_DATA)
-        generate_github_mock(archive_repo, title_slug)
+        this.pad_data.title = "Testing - HackMD"
+        this.pad_data.title_slug = 'testing'
+
+        generate_hackmd_mock(this.pad_data)
+        generate_github_mock(archive_repo, this.pad_data.title_slug)
 
         room.user.say 'alice', "hubot archive #{DEFAULT_PAD_DATA.link}"
         setTimeout done, 100
+
+      it 'should create pull request', ->
+        hubot_reply = room.messages[1][1]
+        expect(hubot_reply).to.include affirmative_response
+
+    context 'hypha-specific title filtering', (done) ->
+
+      beforeEach (done) ->
+        this.pad_data.title = "2019-01-01 Hypha Worker Co-op: Test Meeting - HackMD"
+        this.pad_data.title_slug = '2019-01-01-test-meeting'
+
+        generate_hackmd_mock(this.pad_data)
+        generate_github_mock(archive_repo, this.pad_data.title_slug)
+
+        room.user.say 'alice', "hubot archive #{DEFAULT_PAD_DATA.link}"
+        setTimeout done, 100
+
+      it 'should create pull request', ->
+        hubot_reply = room.messages[1][1]
+        expect(hubot_reply).to.include affirmative_response
+
+    context 'non-standard word separators', (done) ->
+
+      beforeEach (done) ->
+        this.pad_data.title = "Test Title/Heading with plus+signs - HackMD"
+        this.pad_data.title_slug = 'test-title-heading-with-plus-signs'
+
+        generate_hackmd_mock(this.pad_data)
+        generate_github_mock(archive_repo, this.pad_data.title_slug)
+
+        room.user.say 'alice', "hubot archive #{DEFAULT_PAD_DATA.link}"
+        setTimeout done, 100
+
+      it 'should create pull request', ->
+        hubot_reply = room.messages[1][1]
+        expect(hubot_reply).to.include affirmative_response
+
+    context 'ampersand in title', (done) ->
+
+      beforeEach (done) ->
+        this.pad_data.title = "Test Title & Ampersands - HackMD"
+        this.pad_data.title_slug = 'test-title-ampersands'
+
+        generate_hackmd_mock(this.pad_data)
+        generate_github_mock(archive_repo, this.pad_data.title_slug)
+
+        room.user.say 'alice', "hubot archive #{DEFAULT_PAD_DATA.link}"
+        setTimeout done, 100
+
+      it 'should create pull request', ->
+        hubot_reply = room.messages[1][1]
+        expect(hubot_reply).to.include affirmative_response
 
   context 'archiving private notes', (done) ->
     beforeEach ->
