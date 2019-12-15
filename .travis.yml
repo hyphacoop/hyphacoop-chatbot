@@ -1,0 +1,14 @@
+language: node_js
+
+nodejs:
+  - lts/*
+  - 8
+
+cache: yarn
+
+notifications:
+  email:
+    recipients:
+      - patrick.c.connolly@gmail.com
+    on_success: change
+    on_failure: always
