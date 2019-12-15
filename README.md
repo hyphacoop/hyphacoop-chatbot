@@ -1,6 +1,12 @@
 # Hypha Co-op Chatbot: Roobot
 
-![Test Status Badge](https://github.com/actions/hyphacoop/hyphacoop-chatbot/workflows/.github/workflows/tests.yml/badge.svg)
+[![GitHub Actions Build Status Badge][action-img]][action-url]
+[![Travis CI Build Status Badge][travis-img]][travis-url
+
+   [action-img]: https://github.com/hyphacoop/hyphacoop-chatbot/workflows/Node%20CI/badge.svg
+   [action-url]: https://github.com/hyphacoop/hyphacoop-chatbot/actions?query=workflow:%22Node+CI%22
+   [travis-img]: https://img.shields.io/travis/hyphacoop/hyphacoop-chatbot.svg?label=Tests&logo=travis
+   [travis-url]: https://travis-ci.org/hyphacoop/hyphacoop-chatbot
 
 > **Note:** For now, we're pretending the name of the chatbot is
 > `roobot`, but that is up for debate. Consider it a placeholder.
