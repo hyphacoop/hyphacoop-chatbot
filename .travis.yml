@@ -6,6 +6,10 @@ nodejs:
 
 cache: yarn
 
+branches:
+  only:
+    - master
+
 notifications:
   email:
     recipients:
