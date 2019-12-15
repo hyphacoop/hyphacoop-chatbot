@@ -1,5 +1,7 @@
 # Hypha Co-op Chatbot: Roobot
 
+![Test Status Badge](https://github.com/actions/hyphacoop/hyphacoop-chatbot/workflows/.github/workflows/tests.yml/badge.svg)
+
 > **Note:** For now, we're pretending the name of the chatbot is
 > `roobot`, but that is up for debate. Consider it a placeholder.
 
