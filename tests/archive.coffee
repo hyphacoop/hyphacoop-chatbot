@@ -10,18 +10,22 @@ archive_repo =
     name: 'master'
     sha: '1234567890abcdef'
 
-generate_github_mock = (repo, title_slug) ->
+# Pass in `this` context in which to store response data
+generate_github_mock = (repo, title_slug, ctx = {}) ->
   nock('https://api.github.com')
     .persist()
     .get("/repos/#{repo.slug}")
     .reply 200, {default_branch: repo.default_branch.name, owner: {login: repo.user}}
     .get("/repos/#{repo.slug}/branches/#{repo.default_branch.name}")
     .reply 200, {commit: {sha: repo.default_branch.sha}}
-    .post("/repos/#{repo.slug}/git/refs")
+    # Store response in passed context
+    .post("/repos/#{repo.slug}/git/refs", (body) => ctx.ref_response = body; true )
     .reply 201, {}
-    .put("/repos/#{repo.slug}/contents/#{title_slug}.md")
+    # Store response in passed context
+    .put("/repos/#{repo.slug}/contents/#{title_slug}.md", (body) => ctx.file_response = body; true )
     .reply 201, {}
-    .post("/repos/#{repo.slug}/pulls")
+    # Store response in passed context
+    .post("/repos/#{repo.slug}/pulls", (body) => ctx.pr_response = body; true )
     .reply 201, {html_url: "https://github.com/#{repo.slug}/pull/123"}
 
 DEFAULT_PAD_DATA =
@@ -78,6 +82,22 @@ describe 'archive', ->
     it 'should create pull request', ->
       hubot_reply = room.messages[1][1]
       expect(hubot_reply).to.include affirmative_response
+
+  context 'user successfully archives a link', (done) ->
+    beforeEach (done) ->
+      nock.cleanAll()
+
+      generate_github_mock(archive_repo, DEFAULT_PAD_DATA.title_slug, this)
+      generate_hackmd_mock(DEFAULT_PAD_DATA)
+      room.user.say 'alice', "hubot archive #{DEFAULT_PAD_DATA.link}"
+      setTimeout done, 100
+
+    it 'should create pull request', ->
+      hubot_reply = room.messages[1][1]
+      expect(hubot_reply).to.include affirmative_response
+
+    it 'should create a PR body with HTML link', ->
+      expect(this.pr_response.body).to.include "https://myorg.github.io/myrepo/#{DEFAULT_PAD_DATA.title_slug}.html"
 
   context 'archiving notes with various titles', (done) ->
     beforeEach ->
