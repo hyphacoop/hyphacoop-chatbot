@@ -4,6 +4,9 @@
   "private": true,
   "author": "Patrick Connolly <patrick.c.connolly@gmail.com>",
   "description": "A friendly helper robot that lives in Hypha's chat rooms",
+  "scripts": {
+    "test": "mocha --require coffeescript/register tests/**/*.coffee"
+  },
   "dependencies": {
     "front-matter": "^3.0.2",
     "hubot": "^2.18.0",
@@ -23,5 +26,13 @@
   },
   "engines": {
     "node": "> 4.0.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "coffeescript": "^1.9.3",
+    "hubot-test-helper": "^1.9.0",
+    "mocha": "^6.2.2",
+    "nock": "^11.7.0",
+    "sinon": "^7.5.0"
   }
 }

@@ -1,6 +1,10 @@
-name: Node CI
+name: Run Tests
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
+  pull_request:
 
 jobs:
   build:
@@ -20,4 +24,4 @@ jobs:
     - name: yarn install, and test
       run: |
         yarn install
-        yarn run test --if-present
+        yarn run test
