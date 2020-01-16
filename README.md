@@ -3,8 +3,8 @@
 [![GitHub Actions Build Status Badge][action-img]][action-url]
 [![Travis CI Build Status Badge][travis-img]][travis-url]
 
-   [action-img]: https://github.com/hyphacoop/hyphacoop-chatbot/workflows/Node%20CI/badge.svg
-   [action-url]: https://github.com/hyphacoop/hyphacoop-chatbot/actions?query=workflow:%22Node+CI%22
+   [action-img]: https://github.com/hyphacoop/hyphacoop-chatbot/workflows/Run%20Tests/badge.svg
+   [action-url]: https://github.com/hyphacoop/hyphacoop-chatbot/actions?query=workflow%3A%22Run+Tests%22
    [travis-img]: https://img.shields.io/travis/hyphacoop/hyphacoop-chatbot.svg?label=Tests&logo=travis
    [travis-url]: https://travis-ci.org/hyphacoop/hyphacoop-chatbot
 
