@@ -1,7 +1,7 @@
 # Hypha Co-op Chatbot: Roobot
 
 [![GitHub Actions Build Status Badge][action-img]][action-url]
-[![Travis CI Build Status Badge][travis-img]][travis-url
+[![Travis CI Build Status Badge][travis-img]][travis-url]
 
    [action-img]: https://github.com/hyphacoop/hyphacoop-chatbot/workflows/Node%20CI/badge.svg
    [action-url]: https://github.com/hyphacoop/hyphacoop-chatbot/actions?query=workflow:%22Node+CI%22
